@@ -1,0 +1,34 @@
+# Non-private LoRA fine-tune (ε = ∞) — the utility ceiling, also the worst
+# privacy. When `epsilon` is null, finetune/dp_lora.py skips opacus entirely.
+base_model: "meta-llama/Meta-Llama-3-8B"
+splits_path: "/path/to/outputs/splits_v1"
+output_dir: "/path/to/outputs/lora_nondp_base"
+
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+num_epochs: 3
+physical_batch_size: 8
+logical_batch_size: 64
+learning_rate: 5.0e-4
+max_seq_length: 1024
+warmup_ratio: 0.03
+weight_decay: 0.0
+max_grad_norm: 1.0
+
+epsilon: null          # null = non-private
+delta: 1.0e-5
+secure_mode: false
+
+bf16: true
+seed: 42
+log_every: 10

@@ -1,0 +1,34 @@
+# Unlearning run: GA + in-distribution GD (Yao et al. 2024's most robust method).
+#
+# For the three-way comparison, duplicate this file as unlearn_ga.yaml (method: ga)
+# and unlearn_npo.yaml (method: npo).
+
+method: "ga_gd"  # "ga" | "ga_gd" | "npo"
+
+base_model: "meta-llama/Meta-Llama-3-8B"
+splits_path: "/path/to/outputs/splits_v1"
+output_dir: "/path/to/outputs/unlearn_ga_gd"
+
+# Small LR is critical: unlearning diverges fast under gradient ascent.
+# Yao et al. use 1e-5 to 5e-5 range for Yi-6B; Llama-3-8B tolerates similar.
+learning_rate: 5.0e-6
+num_epochs: 3
+batch_size: 4
+gradient_accumulation_steps: 4       # effective batch = 16
+max_seq_length: 1024
+warmup_steps: 20
+weight_decay: 0.0
+max_grad_norm: 1.0
+
+# Method-specific
+gd_weight: 1.0                        # λ on retain-set descent term (GA+GD only)
+npo_beta: 0.1                         # DPO temperature (NPO only)
+
+# Monitoring
+eval_every_steps: 50
+save_every_steps: 200
+
+# Precision
+bf16: true
+
+seed: 42

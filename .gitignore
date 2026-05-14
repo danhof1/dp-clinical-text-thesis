@@ -1,0 +1,45 @@
+# ============================================================
+# dp-clinical-text-thesis .gitignore
+# This repository is CODE ONLY. No data, no results, no models.
+# ============================================================
+
+# --- Data — MIMIC-IV is credentialed-access (PhysioNet DUA) ---
+# Never commit patient text or any derivative.
+*.jsonl
+*.csv
+*.parquet
+*.arrow
+*.docx
+*.pdf
+*.pptx
+
+# --- Models / checkpoints / adapters ---
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+adapter_model*
+models/
+checkpoints/
+
+# --- Outputs / results / logs ---
+outputs/
+generated/
+results/
+logs/
+*.log
+*.out
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+
+# --- OS ---
+.DS_Store
+Thumbs.db

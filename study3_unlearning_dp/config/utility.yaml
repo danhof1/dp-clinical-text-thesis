@@ -1,0 +1,11 @@
+# Downstream utility config: train specialty classifier on synthetic,
+# test on real held-out MTSamples.
+synthetic_path: "/path/to/outputs/synth/dp_lora_eps8_base.jsonl"  # override per run
+splits_path: "/path/to/outputs/splits_v1"
+output_dir: "/path/to/outputs/utility/dp_lora_eps8_base"
+
+clf_model: "distilbert/distilroberta-base"
+clf_epochs: 3
+clf_batch_size: 32
+clf_lr: 2.0e-5
+max_length: 512

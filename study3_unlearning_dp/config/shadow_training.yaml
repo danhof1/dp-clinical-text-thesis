@@ -1,0 +1,38 @@
+# Shadow model training config for LiRA.
+# Each run produces N shadow models, each trained on a random half of the
+# population. Set train_unlearned_counterpart=true for U-LiRA.
+
+base_model: "meta-llama/Meta-Llama-3-8B"
+splits_path: "/path/to/outputs/splits_v1"
+output_root: "/path/to/outputs/shadows_v1"
+
+n_shadows: 8                     # LLM-scale LiRA: 8 is a minimum; 16 preferred
+sample_prob: 0.5
+shadow_seed: 12345
+
+# LoRA (matches dp_lora.yaml)
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+
+num_epochs: 3
+batch_size: 8
+learning_rate: 5.0e-4
+max_seq_length: 1024
+warmup_ratio: 0.03
+weight_decay: 0.0
+max_grad_norm: 1.0
+bf16: true
+log_every: 20
+
+# For U-LiRA: also train unlearned counterparts (set to true only when
+# you're doing the headline U-LiRA analysis; doubles compute)
+train_unlearned_counterpart: false
+unlearn_method: "ga_gd"
+unlearn_learning_rate: 5.0e-6
+unlearn_epochs: 3

@@ -1,0 +1,40 @@
+# Data split configuration for MTSamples unlearning + DP experiment.
+
+# Raw data paths — UPDATE THESE for your cluster
+mtsamples_path: "/path/to/mtsamples.csv"              # or .jsonl
+retain_corpus_path: "/path/to/pubmed_abstracts.jsonl" # PubMed or MIMIC-style
+clean_nonmember_path: "/path/to/clean_nonmembers.jsonl"  # see notes below
+
+out_dir: "/path/to/outputs/splits_v1"
+
+# Split sizes. Members = fine-tuning set = forget set.
+n_members: 2000
+n_nonmembers: 1000
+n_clean_nonmembers: 1000
+n_retain: 2000
+
+# DP audit canaries
+n_canaries: 100
+canary_length: 40
+canary_seed: 1337
+
+# Misc
+seed: 42
+min_note_tokens: 128
+max_note_tokens: 1024
+
+# ---
+# Notes on clean_nonmember_path:
+# The point of this split is to have MIA "out" samples that are definitely
+# NOT in pretraining. Options:
+#   1. Use clinical notes dated after the base model's training cutoff
+#      (Llama-3-8B cutoff ≈ March 2023, so post-2023 notes from a clinical
+#      partner work). NOT MTSamples — those are pre-2023.
+#   2. Use synthetic clinical notes from a trusted generator (e.g. Asclepius)
+#      that you can confirm weren't scraped.
+#   3. Use a locked-down clinical corpus (e.g. private institutional notes)
+#      never released publicly.
+# Do NOT use a random MTSamples split as the "clean" nonmembers — they're
+# all presumed-contaminated. The "nonmembers" split above serves that role
+# specifically for measuring the fine-tuning MIA gap separately from the
+# pretraining contamination gap.

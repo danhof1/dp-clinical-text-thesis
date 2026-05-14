@@ -1,0 +1,37 @@
+# DP-LoRA fine-tuning config. Duplicate for each ε in the sweep.
+
+base_model: "meta-llama/Meta-Llama-3-8B"  # override to unlearned ckpt for the OURS condition
+splits_path: "/path/to/outputs/splits_v1"
+output_dir: "/path/to/outputs/dp_lora_eps8_base"
+
+# LoRA
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+# Training
+num_epochs: 3
+physical_batch_size: 8
+logical_batch_size: 64
+learning_rate: 5.0e-4
+max_seq_length: 1024
+warmup_ratio: 0.03
+weight_decay: 0.0
+max_grad_norm: 1.0
+
+# DP: set epsilon to null or .inf for the non-private baseline
+epsilon: 8.0
+delta: 1.0e-5
+secure_mode: false
+
+bf16: true
+seed: 42
+log_every: 10

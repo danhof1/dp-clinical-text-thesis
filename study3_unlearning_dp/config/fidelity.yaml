@@ -1,0 +1,11 @@
+# Fidelity evaluation config (MAUVE, NER JSD, length stats).
+synthetic_path: "/path/to/outputs/synth/dp_lora_eps8_base.jsonl"  # override per run
+splits_path: "/path/to/outputs/splits_v1"
+tokenizer: "meta-llama/Meta-Llama-3-8B"
+output_dir: "/path/to/outputs/fidelity/dp_lora_eps8_base"
+
+run_mauve: true
+mauve_featurizer: "gpt2-large"
+
+run_ner: true
+max_ner_texts: 1000

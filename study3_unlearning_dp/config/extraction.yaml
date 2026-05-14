@@ -1,0 +1,19 @@
+# Configuration for n-gram verbatim extraction.
+# The headline metric for the synthetic-data paper.
+
+synthetic_path: "/path/to/outputs/synth/dp_lora_eps8_base.jsonl"   # override per run
+splits_path: "/path/to/outputs/splits_v1"
+tokenizer: "meta-llama/Meta-Llama-3-8B"
+output_dir: "/path/to/outputs/attacks/dp_lora_eps8_base/extraction"
+
+# N-gram sizes to sweep over. 25-grams are conservative (roughly a sentence);
+# 50- and 100-grams are strong evidence of memorization.
+n_list: [25, 50, 100]
+
+# Background corpus for "medical boilerplate" filtering. Use a large generic
+# clinical corpus NOT overlapping with members — e.g., PubMed abstracts or
+# an earlier MIMIC release. Any n-gram that appears here is NOT counted as
+# a leakage hit.
+background_path: "/path/to/pubmed_background.jsonl"   # optional; omit to disable filtering
+
+max_length: 2048

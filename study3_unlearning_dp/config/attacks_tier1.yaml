@@ -1,0 +1,13 @@
+# Configuration for Tier 1 attacks (loss, Min-K%, Min-K%++, reference-ratio, zlib).
+# Run this for every (unlearning method × ε × base-or-unlearned) configuration.
+
+base_model: "meta-llama/Meta-Llama-3-8B"     # base for loading adapter on top of
+adapter_path: "/path/to/outputs/dp_lora_eps8_base/final"   # override via CLI per run
+splits_path: "/path/to/outputs/splits_v1"
+output_dir: "/path/to/outputs/attacks/dp_lora_eps8_base/tier1"
+
+# Reference model for ref-ratio and Min-K%++. Use a clean base (not fine-tuned)
+# as the reference — same architecture. We can use the raw base model.
+reference_model: "meta-llama/Meta-Llama-3-8B"
+
+max_length: 1024

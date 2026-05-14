@@ -1,0 +1,31 @@
+base_model: /fs1/shared/model/llm/Llama-3.1-8B-Instruct
+batch_size: 2
+bf16: true
+eval_every_steps: 50
+gd_weight: 1.0
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+learning_rate: 5.0e-06
+lora_alpha: 32
+lora_dropout: 0.05
+lora_r: 16
+lora_target_modules:
+- q_proj
+- k_proj
+- v_proj
+- o_proj
+- gate_proj
+- up_proj
+- down_proj
+max_grad_norm: 1.0
+max_seq_length: 512
+method: ga
+npo_beta: 0.1
+num_epochs: 3
+output_dir: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/unlearn_ga_pmc
+save_every_steps: 200
+seed: 42
+splits_path: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/splits_v1_pmc
+use_lora: true
+warmup_steps: 20
+weight_decay: 0.0

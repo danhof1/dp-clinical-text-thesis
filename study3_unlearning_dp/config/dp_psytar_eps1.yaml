@@ -1,0 +1,28 @@
+base_model: /fs1/shared/model/llm/Llama-3.1-8B-Instruct
+bf16: true
+delta: 1.0e-05
+epsilon: 1.0
+learning_rate: 0.0005
+log_every: 10
+logical_batch_size: 32
+lora_alpha: 32
+lora_dropout: 0.05
+lora_r: 16
+lora_target_modules:
+- q_proj
+- k_proj
+- v_proj
+- o_proj
+- gate_proj
+- up_proj
+- down_proj
+max_grad_norm: 1.0
+max_seq_length: 512
+num_epochs: 5
+output_dir: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/dp_lora_eps1_psytar
+physical_batch_size: 4
+secure_mode: false
+seed: 42
+splits_path: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/splits_psytar
+warmup_ratio: 0.03
+weight_decay: 0.0

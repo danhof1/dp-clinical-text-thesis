@@ -1,0 +1,27 @@
+alpha: 1200.0
+base_model: /fs1/shared/model/llm/BioMistral-7B
+batch_size: 4
+bf16: true
+layer_id: 24
+learning_rate: 5.0e-05
+log_every: 10
+lora_alpha: 32
+lora_dropout: 0.05
+lora_r: 16
+lora_target_modules:
+- q_proj
+- k_proj
+- v_proj
+- o_proj
+- gate_proj
+- up_proj
+- down_proj
+max_grad_norm: 1.0
+max_seq_length: 512
+num_steps: 150
+output_dir: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/clinical_contam/biomistral/unlearn_rmu_layer24
+seed: 42
+splits_path: /fs1/projects/unlearning_pretraining/Proj_code/Scripts_3.0/New Experiment/Unlearning/mtsamples_unlearn_dp/mtsamples_unlearn_dp/outputs/splits_v1_pmc
+steering_coeff: 20.0
+use_lora: true
+weight_decay: 0.0

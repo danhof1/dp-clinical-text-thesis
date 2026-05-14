@@ -1,0 +1,19 @@
+# LiRA attack config (Tier 2).
+# Runs against a single target model using the shadow models trained by
+# shadow_training/train_shadows.py. Run this only at your headline ε
+# (typically ε=8) because it's expensive.
+
+shadow_root: "/path/to/outputs/shadows_v1"
+base_model: "meta-llama/Meta-Llama-3-8B"
+
+target_model_path: "/path/to/outputs/dp_lora_eps8_base/final"  # override per run
+target_has_adapter: true          # set false for unlearned target checkpoints
+
+splits_path: "/path/to/outputs/splits_v1"
+
+output_dir: "/path/to/outputs/attacks/dp_lora_eps8_base/lira"
+
+mode: "online"                    # "online" | "offline"
+ulira: false                      # set true when target is an unlearned+DP model
+
+max_length: 1024
